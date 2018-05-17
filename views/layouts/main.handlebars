@@ -1,13 +1,223 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>My Express App</title>
-  
-  </head>
-  <body>
-    {{{body}}}
-  </body>
+
+<head>
+  <title>MyTime</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link type="text/css" rel="stylesheet" href="/stylesheets/stylesheet.css">
+  <link type="text/css" rel="stylesheet" href="/stylesheets/fullcalendar.css">
+  <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link type="text/css" rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+  <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/compressed/themes/default.date.css">
+  <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/compressed/themes/default.time.css">
+  <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/compressed/themes/default.css">
+
+</head>
+
+<body>
+
+  <div class="main">
+    <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">MyTime</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <form class="navbar-form navbar-left">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search Billable History">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Sign In</a></li>
+        <li><a href="#">Register</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+    
+    
+    
+    
+    
+    
+    <div class="title">
+      <div class="container">
+        <div class="knockout"><a href="/">MyTime</a></div>
+      </div>
+    </div>
+
+    <!--- End of title, start of form ---->
+
+    <div id="colorContainer">
+      <div class="formContainer">
+        <form action="/events" method="POST" role="form" class="form-horizontal">
+          <fieldset>
+
+            <!-- Form Name -->
+            <legend>Enter Your Time</legend>
+
+            <!-- Text input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="data_client">Client</label>
+              <div class="col-md-5">
+                <input id="data_client" name="data_client" placeholder="Client Name" class="form-control input-md" required="" type="text">
+
+              </div>
+            </div>
+
+            <!-- Textarea -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="data_description">Project Description</label>
+              <div class="col-md-8">
+                <textarea class="form-control" id="data_description" name="data_description" placeholder="Describe the project"></textarea>
+              </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="data_hours">Hours</label>
+              <div class="col-md-4">
+                <input id="data_hours" name="data_hours" placeholder="" class="form-control input-md" required="" type="number">
+
+              </div>
+            </div>
+
+            <!-- Date Picker (pickadate.js) -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="data_date">Date</label>
+              <div class="col-md-6">
+                <input id="data_date" name="data_date" placeholder="" class="form-control input-md" required="" type="date">
+
+              </div>
+            </div>
+
+            <!-- Time Picker Start (pickadate.js) -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="data_startTime">Start Time</label>
+              <div class="col-md-6">
+                <input id="data_startTime" name="data_startTime" placeholder="" class="form-control input-md" required="" type="time">
+              </div>
+            </div>
+
+            <!-- Time Picker End (pickadate.js) -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="data_endTime">End Time</label>
+              <div class="col-md-6">
+                <input id="data_endTime" name="data_endTime" placeholder="" class="form-control input-md" required="" type="time">
+              </div>
+            </div>
+
+          </fieldset>
+
+          <div class="btn-wrapper" style="text-align: right; margin-right: 25px; margin-top: 50px;">
+            <button type="submit" class="btn btn-success" id="submitForm">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!--- Event Modal --->
+
+    <div class="modal fade" id="eventModal" tabindex="-1" role="basic" aria-hidden="true" style="display: none">
+      <div class="modal-dialog" style="width:50%">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            <h4 class="modal-title"></h4>
+          </div>
+
+          <div class="modal-body">
+            <div class="container">
+              <div class="row">
+                <h4 class="hoursLabel">Hours:</h4>
+                <p class="hoursPara"></p>
+              </div>
+
+              <div class="row">
+                <h4 class="startLabel">Start Time:</h4>
+                <p class="startPara"></p>
+              </div>
+
+              <div class="row">
+                <h4 class="endLabel">End Time:</h4>
+                <p class="endPara"></p>
+              </div>
 
 
+              <div class="row">
+                <h4 class="descriptionLabel">Description:</h4>
+                <p class="descriptionPara"></p>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <input type="hidden" id="modalId" />
+            <button type="submit" name="delete-event" class="btn btn-danger" id="delete-event">Delete Event</button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+
+
+
+
+
+
+      <!--- Creating space b/w two divs with a blank div (height: 150px) ---->
+
+      <!--- Creating space b/w two divs with a blank div (height: 150px) ---->
+
+
+      <div class="CalendarContainer">
+        <div id='calendar'></div>
+      </div>
+    
+    <br style="clear:both;">
+    
+  </div>
+
+
+
+
+  <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/compressed/picker.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/compressed/picker.date.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/compressed/picker.time.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
+  <script src="/javascripts/main.js"></script>
+
+
+</body>
 
 </html>

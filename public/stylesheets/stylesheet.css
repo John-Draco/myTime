@@ -1,0 +1,123 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: whitesmoke;
+}
+
+#colorContainer{
+  width: 35%;
+}
+
+
+.main{
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-image: url("/images/willian-justen.jpg");
+}
+
+
+
+.knockout {
+  background: url(http://apod.nasa.gov/apod/image/0603/coma_misti.jpg) -80px -80px;
+  color: red;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  font-weight: bold;
+  font-size: 100px;
+  font-family: arial, helvetica;
+  width: 600px;
+  margin: 50px auto;
+  text-align: center;
+}
+
+
+#colorContainer{
+  background-color:;
+  opacity:;
+  
+}
+
+.formContainer {
+  float: left;
+  border-radius: 25px;
+  border: 5px solid #2C69CB;
+  height: 35%; 
+  width: 100%;
+  margin: auto;
+  padding: 10px;
+  background-color: #96b3cc61;
+  margin-left: 50px
+}
+
+.panel-body {
+  background: white;
+  opacity: ;
+}
+
+#panel-inside-body {
+  background: white;
+}
+
+.day-panel {
+color: green;
+}
+
+
+
+/* This is CSS from the Form BootSnippet */ 
+.form-inline .form-group { margin-right:10px; }
+.well-primary {
+color: rgb(255, 255, 255);
+background-color: rgb(66, 139, 202);
+border-color: rgb(53, 126, 189);
+}
+.glyphicon { margin-right:5px; }
+
+#submitForm {
+  bottom: 0;
+}
+
+th {
+  text-align: left;  
+}
+
+th, td {
+    border-bottom: 1px solid #ddd;
+}
+
+
+
+.CalendarContainer {
+  float: right;
+  border-radius: 25px;
+  height: 500px; 
+  width: 50%;
+  border: 5px solid #2C69CB;
+  margin: auto;
+  padding: 10px;
+  margin-right: 50px;
+}
+
+
+
+.fc-day-header{
+  background-color: aliceblue;
+}
+
+.fc-day-number{
+  color: whitesmoke;
+}
+
+.fc-today {
+    background: #728C8C !important;
+    border: none !important;
+    border-top: 1px solid #ddd !important;
+    font-weight: bold;
+} 
