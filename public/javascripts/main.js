@@ -1,7 +1,5 @@
 $(document).ready(function () {
 
-
-
   // Datepicker
   var $inputDate = $('#data_date').pickadate({
     format: 'yyyy-mm-dd',
@@ -121,7 +119,7 @@ $(document).ready(function () {
       //Validate and then Post to server
       $.ajax({
         type: "POST",
-        url: "http://localhost:8080/events",
+        url: "http://www.mybillablecalendar/events",
         dataType: 'json',
         data: {
           id: this.id,
@@ -180,7 +178,7 @@ $(document).ready(function () {
     selectable: true,
     events: function (start, end, timezone, callback) {
       $.ajax({
-        url: "http://localhost:8080/start",
+        url: "http://www.mybillablecalendar/start",
         dataType: 'json',
         data: {
           start: start.format("YYYY-MM-DD"),
@@ -230,7 +228,7 @@ $(document).ready(function () {
 
     $.ajax({
       type: 'DELETE',
-      url: "http://localhost:8080/deleteEvents/" + id,
+      url: "http://www.mybillablecalendar/deleteEvents/" + id,
       success: function (response) {
         alert('Deleting Event');
         window.location.href = '/';
@@ -247,13 +245,6 @@ $(document).ready(function () {
 
     console.log("event deleted");
   });
-
-
-
-
-
-
-
 
 
 });
