@@ -10,7 +10,7 @@ const session = require('express-session');
 const passport = require('passport');
 //const config = require('./config/database');
 
-//DATABASE
+//DATABASE 
 mongoose.connect('mongodb://localhost/myTime');
 let db = mongoose.connection;
 
@@ -31,7 +31,7 @@ var usersRouter = require('./routes/users');
 var app = express();
 
 
-//Bring in models
+//Bring in models 
 let Events = require('./models/events');
 
 // view engine setup
@@ -96,19 +96,6 @@ app.use(expressValidator({
 //app.use(passport.initialize());
 //app.use(passport.session());
 
-// error handler
-
-/*
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
-*/
 
 app.get('/start', function (req, res) {
   Events.find({}, function (err, events) {
