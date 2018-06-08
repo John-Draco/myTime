@@ -1,11 +1,7 @@
-<h1>Welcome</h1>
-
-{{#if published}}
-  {{content}}
-{{/if}}
-
-<ul>
-{{#each people}}
-  <li>{{this}}</li>
-{{/each}}
-</ul>
+  {{#if action}}
+        {{#each action}}
+            <div class="action">
+                {{messages}}
+            </div>
+        {{/each}}
+    {{/if}}

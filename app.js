@@ -5,7 +5,7 @@ const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
-const flash = require('connect-flash');
+const flash = require('express-flash-messages');
 const session = require('express-session');
 const passport = require('passport');
 //const config = require('./config/database');
@@ -30,23 +30,28 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
+
 //Bring in models
 let Events = require('./models/events');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', exphbs({
-  defaultLayout: 'main'
+  extname: 'handlebars',
+  defaultLayout: 'main',
+  layoutDir: __dirname + 'views/layouts/'
 }));
+
 app.set('view engine', 'handlebars');
 
 app.use(express.json());
 app.use(express.urlencoded({
   extended: false
 }));
+
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+//app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 // Body Parser Middleware
@@ -54,21 +59,18 @@ app.use('/users', usersRouter);
 app.use(bodyParser.urlencoded({
   extended: false
 }));
+
 // parse application/json
 app.use(bodyParser.json());
 
+//Express Session Middleware
 app.use(session({
   secret: 'keyboard cat',
   resave: true,
   saveUninitialized: true
 }));
 
-// Express Messages Middleware
-app.use(require('connect-flash')());
-app.use(function (req, res, next) {
-  res.locals.messages = require('express-messages')(req, res);
-  next();
-});
+app.use(flash());
 
 // Express Validator Middleware
 app.use(expressValidator({
@@ -95,6 +97,7 @@ app.use(expressValidator({
 //app.use(passport.session());
 
 // error handler
+
 /*
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
@@ -106,8 +109,11 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 */
+
 app.get('/start', function (req, res) {
   Events.find({}, function (err, events) {
+//req.flash("info", "Email sent");
+//req.flash("error", "Email delivery failed");
     console.log(events);
     res.send(200, events);
   });
@@ -144,14 +150,17 @@ app.delete('/deleteEvents/:id', function (req, res) {
     }
     res.send();
   });
+  
+  res.redirect('/');
 });
 
-app.get('/', function (req, res) {
-  Events.find({}, function (err, events) {
-    res.render('main');
+app.get('/', function(req, res, next) {
+  
+  res.render('./layouts/main', {
+      title: 'My Billable Calendar'
   });
 });
-
+  
 
 module.exports = app;
 
